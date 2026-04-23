@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ranking - Grupo Timoteo</title>
+  <title>Cronograma de Eventos - Grupo Timoteo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -51,7 +51,7 @@
     /* Header */
     .header {
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 30px;
     }
     .header h1 {
       font-size: 2.4em;
@@ -74,258 +74,91 @@
       font-style: italic;
       margin-top: 6px;
     }
-    .header .live-badge {
+    .header .page-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(239, 68, 68, 0.2);
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      color: #fca5a5;
-      padding: 4px 14px;
+      gap: 8px;
+      background: rgba(139, 92, 246, 0.2);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      color: #c4b5fd;
+      padding: 6px 16px;
       border-radius: 20px;
-      font-size: 0.8em;
+      font-size: 0.85em;
       font-weight: 700;
       margin-top: 12px;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    .live-dot {
-      width: 8px; height: 8px;
-      background: #ef4444;
-      border-radius: 50%;
-      animation: pulse-dot 1.5s infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.7); }
+    .page-badge svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
     }
 
-    /* Loading */
-    .loading {
-      text-align: center;
-      padding: 80px 20px;
+    /* Cards Grid */
+    .cards-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 30px;
     }
-    .spinner {
-      width: 50px; height: 50px;
-      border: 4px solid rgba(255,255,255,0.1);
-      border-top-color: #facc15;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 20px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .loading p { color: #94a3b8; font-size: 1.1em; }
-
-    /* Error */
-    .error-msg {
-      text-align: center;
-      padding: 40px 20px;
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      border-radius: 16px;
-      margin: 20px 0;
-    }
-    .error-msg p { color: #fca5a5; }
-
-    /* Podium Section */
-    .podium-section {
-      margin: 30px 0 40px;
-    }
-    .podium-section h2 {
+    .cards-section h2 {
       text-align: center;
       font-size: 1.3em;
       font-weight: 800;
       color: #e2e8f0;
-      margin-bottom: 25px;
+      margin-bottom: 5px;
       text-transform: uppercase;
       letter-spacing: 2px;
     }
 
-    .podium {
+    .event-card {
       display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      gap: 12px;
-      padding: 0 10px;
+      align-items: stretch;
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: card-slide 0.6s ease-out both;
+    }
+    .event-card:nth-child(1) { animation-delay: 0.05s; }
+    .event-card:nth-child(2) { animation-delay: 0.1s; }
+    .event-card:nth-child(3) { animation-delay: 0.15s; }
+    .event-card:nth-child(4) { animation-delay: 0.2s; }
+    .event-card:nth-child(5) { animation-delay: 0.25s; }
+    .event-card:nth-child(6) { animation-delay: 0.3s; }
+    .event-card:nth-child(7) { animation-delay: 0.35s; }
+
+    .event-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
     }
 
-    .podium-place {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      animation: podium-rise 0.8s ease-out both;
-    }
-    .podium-place:nth-child(1) { animation-delay: 0.3s; }
-    .podium-place:nth-child(2) { animation-delay: 0.1s; }
-    .podium-place:nth-child(3) { animation-delay: 0.5s; }
-
-    @keyframes podium-rise {
-      from { transform: translateY(40px); opacity: 0; }
+    @keyframes card-slide {
+      from { transform: translateY(30px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
 
-    .podium-avatar {
-      width: 60px; height: 60px;
-      border-radius: 50%;
+    .event-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Navigation buttons */
+    .nav-buttons {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       justify-content: center;
-      font-size: 1.8em;
-      margin-bottom: 8px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-    .podium-place.first .podium-avatar {
-      width: 75px; height: 75px;
-      font-size: 2.2em;
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      box-shadow: 0 0 30px rgba(251, 191, 36, 0.4);
-    }
-    .podium-place.second .podium-avatar {
-      background: linear-gradient(135deg, #d1d5db, #9ca3af);
-      box-shadow: 0 0 20px rgba(156, 163, 175, 0.3);
-    }
-    .podium-place.third .podium-avatar {
-      background: linear-gradient(135deg, #d97706, #b45309);
-      box-shadow: 0 0 20px rgba(217, 119, 6, 0.3);
-    }
-
-    .podium-name {
-      font-weight: 800;
-      font-size: 0.85em;
-      text-align: center;
-      max-width: 130px;
-      line-height: 1.2;
-      margin-bottom: 8px;
-      word-break: break-word;
-    }
-    .podium-place.first .podium-name { color: #fde68a; }
-    .podium-place.second .podium-name { color: #e2e8f0; }
-    .podium-place.third .podium-name { color: #fbbf24; }
-
-    .podium-bar {
-      width: 110px;
-      border-radius: 12px 12px 0 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1.6em;
-      color: rgba(255,255,255,0.9);
-      position: relative;
-      overflow: hidden;
-    }
-    .podium-bar::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-      animation: bar-shine 3s infinite;
-    }
-    @keyframes bar-shine {
-      0% { left: -100%; }
-      100% { left: 100%; }
-    }
-
-    .podium-place.first .podium-bar {
-      height: 150px;
-      background: linear-gradient(180deg, #f59e0b, #d97706);
-    }
-    .podium-place.second .podium-bar {
-      height: 110px;
-      background: linear-gradient(180deg, #6b7280, #4b5563);
-    }
-    .podium-place.third .podium-bar {
-      height: 80px;
-      background: linear-gradient(180deg, #b45309, #92400e);
-    }
-
-    /* Ranking Table */
-    .ranking-section {
+      gap: 12px;
       margin-top: 10px;
     }
-    .ranking-section h2 {
-      text-align: center;
-      font-size: 1.2em;
-      font-weight: 800;
-      color: #e2e8f0;
-      margin-bottom: 15px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .ranking-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .ranking-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      border-radius: 12px;
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.05);
-      transition: transform 0.2s, box-shadow 0.2s;
-      animation: row-slide 0.5s ease-out both;
-    }
-    .ranking-row:hover {
-      transform: translateX(5px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-
-    @keyframes row-slide {
-      from { transform: translateX(-30px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
-    .rank-badge {
-      width: 38px; height: 38px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1em;
-      flex-shrink: 0;
-    }
-    .rank-badge.top1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #451a03; }
-    .rank-badge.top2 { background: linear-gradient(135deg, #d1d5db, #9ca3af); color: #1f2937; }
-    .rank-badge.top3 { background: linear-gradient(135deg, #d97706, #b45309); color: #fff; }
-    .rank-badge.normal { background: rgba(71, 85, 105, 0.5); color: #cbd5e1; }
-
-    .rank-name {
-      flex: 1;
-      font-weight: 700;
-      font-size: 1em;
-      color: #f1f5f9;
-    }
-
-    .rank-medal {
-      font-size: 1.3em;
-    }
-
-    /* Confetti for top positions */
-    .ranking-row.gold {
-      background: linear-gradient(90deg, rgba(251, 191, 36, 0.1), rgba(30, 41, 59, 0.7));
-      border-color: rgba(251, 191, 36, 0.2);
-    }
-    .ranking-row.silver {
-      background: linear-gradient(90deg, rgba(156, 163, 175, 0.1), rgba(30, 41, 59, 0.7));
-      border-color: rgba(156, 163, 175, 0.2);
-    }
-    .ranking-row.bronze {
-      background: linear-gradient(90deg, rgba(217, 119, 6, 0.1), rgba(30, 41, 59, 0.7));
-      border-color: rgba(217, 119, 6, 0.2);
-    }
-
-    /* CTA Button */
     .cta-button {
       display: inline-block;
-      margin-top: 30px;
       padding: 14px 32px;
       background: linear-gradient(135deg, #f97316, #facc15);
       color: #1a0533;
@@ -346,57 +179,6 @@
     .cta-button:active {
       transform: translateY(0);
     }
-    .cta-center {
-      text-align: center;
-    }
-
-    /* Calendar Nav Button */
-    .calendar-nav {
-      position: fixed;
-      top: 18px;
-      right: 18px;
-      z-index: 100;
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
-      transition: transform 0.2s, box-shadow 0.2s;
-      border: 2px solid rgba(255,255,255,0.15);
-    }
-    .calendar-nav:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 28px rgba(139, 92, 246, 0.6);
-    }
-    .calendar-nav svg {
-      width: 24px;
-      height: 24px;
-      fill: white;
-    }
-    .calendar-nav .tooltip {
-      position: absolute;
-      right: 56px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(30, 41, 59, 0.95);
-      color: #e2e8f0;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 0.75em;
-      font-weight: 700;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .calendar-nav:hover .tooltip {
-      opacity: 1;
-    }
 
     /* Footer */
     .footer {
@@ -406,26 +188,14 @@
       color: #475569;
       font-size: 0.8em;
     }
-    .update-timer {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      color: #64748b;
-      font-size: 0.85em;
-      margin-top: 15px;
-    }
 
     /* Responsive */
     @media (max-width: 600px) {
       .header h1 { font-size: 1.6em; }
-      .podium-bar { width: 85px; }
-      .podium-place.first .podium-bar { height: 120px; }
-      .podium-place.second .podium-bar { height: 90px; }
-      .podium-place.third .podium-bar { height: 65px; }
-      .podium-avatar { width: 48px; height: 48px; font-size: 1.4em; }
-      .podium-place.first .podium-avatar { width: 58px; height: 58px; font-size: 1.7em; }
-      .podium-name { font-size: 0.75em; max-width: 95px; }
-      .rank-name { font-size: 0.9em; }
+      .cta-button {
+        padding: 12px 24px;
+        font-size: 0.9em;
+      }
     }
   </style>
 </head>
@@ -434,270 +204,58 @@
   <!-- Background particles -->
   <div class="bg-particles" id="particles"></div>
 
-  <!-- Calendar navigation -->
-  <a class="calendar-nav" href="cronograma.html" aria-label="Cronograma de eventos">
-    <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
-    <span class="tooltip">Cronograma</span>
-  </a>
-
   <div class="container">
     <!-- Header -->
     <div class="header">
       <h1>Grupo Timoteo</h1>
-      <p class="subtitle">"Ninguno tenga en poco tu juventud..." — 1 Timoteo 4:12</p>
-      <div class="live-badge">
-        <span class="live-dot"></span>
-        Ranking en vivo
+      <p class="subtitle">"Ninguno tenga en poco tu juventud..." 1 Timoteo 4:12</p>
+      <div class="page-badge">
+        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+        Cronograma de Eventos
       </div>
     </div>
 
-    <!-- Content area -->
-    <div id="content">
-      <div class="loading">
-        <div class="spinner"></div>
-        <p>Cargando ranking...</p>
+    <!-- Event Cards -->
+    <div class="cards-section">
+      <div class="event-card">
+        <img src="https://lh3.googleusercontent.com/d/19bFCN8MIJ1ymlNYeMqzGmzEHNpeDjKiw" alt="Evento 1" loading="lazy">
+      </div>
+      <div class="event-card">
+        <img src="https://lh3.googleusercontent.com/d/1gu3sqlWDVhtVIGMY2XWn3ItFAMum_mJa" alt="Evento 2" loading="lazy">
+      </div>
+      <div class="event-card">
+        <img src="https://lh3.googleusercontent.com/d/1NGhNHSSBejNCrXudgJkukQm1k5o9b890" alt="Evento 3" loading="lazy">
+      </div>
+      <div class="event-card">
+        <img src="https://lh3.googleusercontent.com/d/1egylar6i3lziuT-4VTiUO8c0lLRiDTJb" alt="Evento 4" loading="lazy">
+      </div>
+      <div class="event-card">
+        <img src="https://lh3.googleusercontent.com/d/1gQDERHznBSRjOoftjgOPWmvYd8Yo6chW" alt="Evento 5" loading="lazy">
+      </div>
+      <div class="event-card">
+        <img src="https://lh3.googleusercontent.com/d/12r5iL4sAneGBlmBrjVT6U1lfnPQ3jLsU" alt="Evento 6" loading="lazy">
+      </div>
+      <div class="event-card">
+        <img src="https://lh3.googleusercontent.com/d/1D9RwlIutJ2rEyJBQg2IsSZ1abVCC-wmQ" alt="Evento 7" loading="lazy">
       </div>
     </div>
 
-    <!-- CTA Button -->
-    <div class="cta-center">
-      <a class="cta-button" href="puntuacion.html">Ver mi puntuación completa</a>
-    </div>
-
-    <!-- Update timer -->
-    <div class="update-timer" id="timer">
-      Actualización automática cada 60 segundos
+    <!-- Navigation -->
+    <div class="nav-buttons">
+      <a class="cta-button" href="index.html"> Ranking en vivo</a>
+      <a class="cta-button" href="puntuacion.html">Ver puntuación completa</a>
     </div>
 
     <div class="footer">
-      Grupo Timoteo &bull; Datos en tiempo real desde Google Sheets
+      Grupo Timoteo &bull; Cronograma de Eventos
     </div>
   </div>
 
   <script>
-    // Google Sheets published CSV URL
-    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTcPfinpAdZBTDzPVAkPe1Bj4A9a1t0Ah_lvZ1Gv0LdYEopUhjD95vSWtBIl7iLwg/pub?gid=413021151&single=true&output=csv';
-    const REFRESH_INTERVAL = 60000; // 60 seconds
-
-    // Parse CSV properly (handles quoted fields with commas)
-    function parseCSV(text) {
-      const rows = [];
-      let current = '';
-      let inQuotes = false;
-      const chars = text.split('');
-
-      for (let i = 0; i < chars.length; i++) {
-        const c = chars[i];
-        if (c === '"') {
-          if (inQuotes && chars[i + 1] === '"') {
-            current += '"';
-            i++;
-          } else {
-            inQuotes = !inQuotes;
-          }
-        } else if (c === ',' && !inQuotes) {
-          rows.push(current);
-          current = '';
-        } else if ((c === '\n' || c === '\r') && !inQuotes) {
-          if (c === '\r' && chars[i + 1] === '\n') i++;
-          rows.push(current);
-          current = '';
-          // Mark row boundary
-          rows.push('\n');
-        } else {
-          current += c;
-        }
-      }
-      if (current) rows.push(current);
-
-      // Convert flat array with newline markers into 2D array
-      const result = [];
-      let row = [];
-      for (const cell of rows) {
-        if (cell === '\n') {
-          result.push(row);
-          row = [];
-        } else {
-          row.push(cell.trim());
-        }
-      }
-      if (row.length > 0) result.push(row);
-      return result;
-    }
-
-    // Find header row and column indices
-    function findColumns(data) {
-      for (let i = 0; i < Math.min(data.length, 15); i++) {
-        const row = data[i];
-        let puestoCol = -1;
-        let nombreCol = -1;
-
-        for (let j = 0; j < row.length; j++) {
-          const val = row[j].toLowerCase().replace(/[#\s]/g, '');
-          if (val === 'puesto' || row[j].trim() === '# Puesto') {
-            puestoCol = j;
-          }
-          if (val === 'nombre' || row[j].trim().toUpperCase() === 'NOMBRE') {
-            nombreCol = j;
-          }
-        }
-
-        if (puestoCol !== -1) {
-          // If NOMBRE not found in same row, search nearby rows
-          if (nombreCol === -1) {
-            for (let k = Math.max(0, i - 3); k <= i; k++) {
-              for (let j = 0; j < data[k].length; j++) {
-                if (data[k][j].trim().toUpperCase() === 'NOMBRE') {
-                  nombreCol = j;
-                  break;
-                }
-              }
-              if (nombreCol !== -1) break;
-            }
-          }
-          return { headerRow: i, puestoCol, nombreCol };
-        }
-      }
-
-      // Fallback: try column AQ (index 42) if header not found by name
-      return { headerRow: 5, puestoCol: 42, nombreCol: 1 };
-    }
-
-    // Extract ranking data
-    function extractRanking(data) {
-      const { headerRow, puestoCol, nombreCol } = findColumns(data);
-      const participants = [];
-
-      for (let i = headerRow + 1; i < data.length; i++) {
-        const row = data[i];
-        if (!row || row.length <= Math.max(puestoCol, nombreCol)) continue;
-
-        const puesto = row[puestoCol] ? row[puestoCol].trim() : '';
-        const nombre = row[nombreCol] ? row[nombreCol].trim() : '';
-
-        // Only include rows with a valid ranking number and a name
-        const puestoNum = parseInt(puesto, 10);
-        if (!isNaN(puestoNum) && puestoNum > 0 && nombre && nombre.length > 1) {
-          participants.push({
-            puesto: puestoNum,
-            nombre: nombre
-          });
-        }
-      }
-
-      // Sort by puesto number (respecting the column values)
-      participants.sort((a, b) => a.puesto - b.puesto);
-      return participants;
-    }
-
-    // Get initials for avatar
-    function getInitials(name) {
-      return name.split(' ')
-        .filter(w => w.length > 0)
-        .slice(0, 2)
-        .map(w => w[0].toUpperCase())
-        .join('');
-    }
-
-    // Render the podium (top 3)
-    function renderPodium(top3) {
-      if (top3.length < 3) return '';
-
-      // Podium order: 2nd, 1st, 3rd
-      const order = [top3[1], top3[0], top3[2]];
-      const classes = ['second', 'first', 'third'];
-      const medals = ['🥈', '🥇', '🥉'];
-      const labels = ['2°', '1°', '3°'];
-
-      let html = '<div class="podium-section">';
-      html += '<h2>🏆 Top 3 🏆</h2>';
-      html += '<div class="podium">';
-
-      order.forEach((p, i) => {
-        html += `
-          <div class="podium-place ${classes[i]}">
-            <div class="podium-avatar">${medals[i]}</div>
-            <div class="podium-name">${p.nombre}</div>
-            <div class="podium-bar">${labels[i]}</div>
-          </div>`;
-      });
-
-      html += '</div></div>';
-      return html;
-    }
-
-    // Render the full ranking list
-    function renderRankingList(participants) {
-      let html = '<div class="ranking-section">';
-      html += '<h2>Ranking Completo</h2>';
-      html += '<div class="ranking-list">';
-
-      participants.forEach((p, i) => {
-        let rowClass = '';
-        let badgeClass = 'normal';
-        let medal = '';
-
-        if (p.puesto === 1) { rowClass = 'gold'; badgeClass = 'top1'; medal = '🥇'; }
-        else if (p.puesto === 2) { rowClass = 'silver'; badgeClass = 'top2'; medal = '🥈'; }
-        else if (p.puesto === 3) { rowClass = 'bronze'; badgeClass = 'top3'; medal = '🥉'; }
-
-        html += `
-          <div class="ranking-row ${rowClass}" style="animation-delay: ${i * 0.05}s">
-            <div class="rank-badge ${badgeClass}">${p.puesto}</div>
-            <div class="rank-name">${p.nombre}</div>
-            ${medal ? `<span class="rank-medal">${medal}</span>` : ''}
-          </div>`;
-      });
-
-      html += '</div></div>';
-      return html;
-    }
-
-    // Main fetch and render
-    async function loadRanking() {
-      const content = document.getElementById('content');
-
-      try {
-        const response = await fetch(SHEET_CSV_URL);
-        if (!response.ok) throw new Error('No se pudo cargar la hoja de cálculo');
-
-        const csvText = await response.text();
-        const data = parseCSV(csvText);
-        const participants = extractRanking(data);
-
-        if (participants.length === 0) {
-          content.innerHTML = '<div class="error-msg"><p>No se encontraron participantes con ranking.</p></div>';
-          return;
-        }
-
-        let html = '';
-
-        // Podium for top 3
-        const top3 = participants.filter(p => p.puesto >= 1 && p.puesto <= 3);
-        if (top3.length >= 3) {
-          html += renderPodium(top3);
-        }
-
-        // Full ranking list
-        html += renderRankingList(participants);
-
-        content.innerHTML = html;
-
-      } catch (err) {
-        console.error('Error loading ranking:', err);
-        content.innerHTML = `
-          <div class="error-msg">
-            <p>Error al cargar el ranking. Reintentando...</p>
-            <p style="font-size:0.8em; margin-top:8px; color:#64748b;">${err.message}</p>
-          </div>`;
-      }
-    }
-
     // Create background particles
     function createParticles() {
       const container = document.getElementById('particles');
       const colors = ['#f97316', '#facc15', '#8b5cf6', '#3b82f6', '#10b981', '#ef4444'];
-
       for (let i = 0; i < 20; i++) {
         const span = document.createElement('span');
         const size = Math.random() * 15 + 5;
@@ -710,25 +268,7 @@
         container.appendChild(span);
       }
     }
-
-    // Countdown display
-    let countdown = 60;
-    function updateTimer() {
-      countdown--;
-      if (countdown <= 0) {
-        countdown = 60;
-        loadRanking();
-      }
-      const timerEl = document.getElementById('timer');
-      if (timerEl) {
-        timerEl.textContent = `Próxima actualización en ${countdown}s`;
-      }
-    }
-
-    // Initialize
     createParticles();
-    loadRanking();
-    setInterval(updateTimer, 1000);
   </script>
 </body>
 </html>
