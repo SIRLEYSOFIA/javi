@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puntuación Completa - Grupo Timoteo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a0533 0%, #0d1b3e 50%, #0a2a2f 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      text-align: center;
+      padding: 30px 20px 15px;
+    }
+    .header h1 {
+      font-size: 1.6em;
+      font-weight: 900;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header p {
+      color: #94a3b8;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    .sheet-container {
+      flex: 1;
+      padding: 0 10px 10px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sheet-container iframe {
+      flex: 1;
+      width: 100%;
+      min-height: 70vh;
+      border: none;
+      border-radius: 12px;
+      background: white;
+    }
+
+    .back-section {
+      text-align: center;
+      padding: 25px 20px 35px;
+    }
+    .back-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #1a0533;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1em;
+      font-weight: 800;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+    }
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(249, 115, 22, 0.5);
+    }
+    .back-button:active {
+      transform: translateY(0);
+    }
+
+    /* Calendar Nav Button */
+    .calendar-nav {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 100;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+    .calendar-nav:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(139, 92, 246, 0.6);
+    }
+    .calendar-nav svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+    .calendar-nav .tooltip {
+      position: absolute;
+      right: 56px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(30, 41, 59, 0.95);
+      color: #e2e8f0;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.75em;
+      font-weight: 700;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .calendar-nav:hover .tooltip {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Calendar navigation -->
+  <a class="calendar-nav" href="cronograma.html" aria-label="Cronograma de eventos">
+    <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+    <span class="tooltip">Cronograma</span>
+  </a>
+
+  <div class="header">
+    <h1>Grupo Timoteo</h1>
+    <p>Puntuación completa</p>
+  </div>
+
+  <div class="sheet-container">
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTcPfinpAdZBTDzPVAkPe1Bj4A9a1t0Ah_lvZ1Gv0LdYEopUhjD95vSWtBIl7iLwg/pubhtml?gid=413021151&single=true"></iframe>
+  </div>
+
+  <div class="back-section">
+    <a class="back-button" href="index.html">&larr; Volver al ranking en vivo</a>
+  </div>
+</body>
+</html>
