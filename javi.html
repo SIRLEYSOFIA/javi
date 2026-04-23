@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi página completa</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f0f2f5;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input {
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      margin: auto;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Mi página web 🚀</h1>
+    <p id="mensaje">Escribe tu nombre:</p>
+
+    <input type="text" id="nombre" placeholder="Tu nombre">
+
+    <br><br>
+
+    <button onclick="saludar()">Saludar</button>
+
+    <br><br>
+
+    <button onclick="cambiarColor()">Cambiar color</button>
+  </div>
+
+  <script>
+    function saludar() {
+      let nombre = document.getElementById("nombre").value;
+
+      if(nombre === "") {
+        alert("Escribe tu nombre primero");
+      } else {
+        document.getElementById("mensaje").innerText =
+          "Hola " + nombre + " 👋 ¡Bienvenido a tu página!";
+      }
+    }
+
+    function cambiarColor() {
+      document.body.style.background =
+        "#" + Math.floor(Math.random()*16777215).toString(16);
+    }
+  </script>
+
+</body>
+</html>
