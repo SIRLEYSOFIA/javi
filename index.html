@@ -546,12 +546,29 @@
       return String(text || '')
         .toLowerCase()
         .normalize('NFD')
-
         .replace(/[\u0300-\u036f]/g, '')
         .replace(/[#\s]/g, '');
     }
 
+    function isRankHeader(text) {
+      const val = normalizeHeader(text);
+      const exact = String(text || '').trim().toLowerCase();
+      return exact === '#' || exact === '# puesto' || exact === 'puesto' || exact === 'rank' || exact === 'posición' || exact === 'posicion' || exact === 'ranking';
+    }
+
+    function isNameHeader(text) {
+      const val = normalizeHeader(text);
+      return val === 'nombre' || val === 'equipo' || val === 'jugador' || val === 'team';
+    }
+
+    function isScoreHeader(text) {
+      const val = normalizeHeader(text);
+      return val === 'puntuacion' || val === 'puntaje' || val === 'puntos' || val === 'score' || val === 'total';
+    }
+
     function findColumns(data) {
+      let fallback = { headerRow: 0, puestoCol: 0, nombreCol: 1, scoreCol: -1 };
+
       for (let i = 0; i < Math.min(data.length, 15); i++) {
         const row = data[i];
         let puestoCol = -1;
@@ -559,24 +576,23 @@
         let scoreCol = -1;
 
         for (let j = 0; j < row.length; j++) {
-          const val = normalizeHeader(row[j]);
-          if (val.includes('puesto') || val === 'puesto' || row[j].trim() === '# Puesto') {
+          const cell = row[j] || '';
+          if (isRankHeader(cell)) {
             puestoCol = j;
           }
-          if (val.includes('nombre') || row[j].trim().toUpperCase() === 'NOMBRE') {
+          if (isNameHeader(cell)) {
             nombreCol = j;
           }
-          if (val.includes('puntuacion') || val.includes('puntaje') || val.includes('puntos') || val.includes('score') || val.includes('total')) {
+          if (isScoreHeader(cell)) {
             scoreCol = j;
           }
         }
 
-        if (puestoCol !== -1) {
-          // If NOMBRE not found in same row, search nearby rows
+        if (puestoCol !== -1 && (nombreCol !== -1 || scoreCol !== -1)) {
           if (nombreCol === -1) {
             for (let k = Math.max(0, i - 3); k <= i; k++) {
               for (let j = 0; j < data[k].length; j++) {
-                if (normalizeHeader(data[k][j]).includes('nombre')) {
+                if (isNameHeader(data[k][j])) {
                   nombreCol = j;
                   break;
                 }
@@ -584,12 +600,43 @@
               if (nombreCol !== -1) break;
             }
           }
-          return { headerRow: i, puestoCol, nombreCol, scoreCol };
+          if (scoreCol === -1) {
+            for (let j = 0; j < row.length; j++) {
+              if (isScoreHeader(row[j])) {
+                scoreCol = j;
+                break;
+              }
+            }
+          }
+          return {
+            headerRow: i,
+            puestoCol,
+            nombreCol: nombreCol === -1 ? puestoCol + 1 : nombreCol,
+            scoreCol
+          };
         }
       }
 
-      // Fallback: try column AQ (index 42) if header not found by name
-      return { headerRow: 5, puestoCol: 42, nombreCol: 1, scoreCol: -1 };
+      for (let i = 0; i < Math.min(data.length, 12); i++) {
+        const row = data[i];
+        if (!row) continue;
+        for (let j = 0; j < row.length; j++) {
+          const value = (row[j] || '').toString().trim();
+          if (/^\d+$/.test(value)) {
+            const nameCandidate = (row[j + 1] || '').toString().trim();
+            if (nameCandidate.length > 0) {
+              return {
+                headerRow: i - 1 >= 0 ? i - 1 : i,
+                puestoCol: j,
+                nombreCol: j + 1,
+                scoreCol: j + 2 < row.length ? j + 2 : -1
+              };
+            }
+          }
+        }
+      }
+
+      return fallback;
     }
 
     // Extract ranking data
